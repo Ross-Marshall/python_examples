@@ -1,0 +1,130 @@
+9223372036854775807
+
+megazor@uniblab:~$ python
+Python 2.7.15+ (default, Oct  7 2019, 17:39:04) 
+[GCC 7.4.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print("Hello World")
+Hello World
+>>> quit
+Use quit() or Ctrl-D (i.e. EOF) to exit
+>>> c
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'c' is not defined
+>>> z
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'z' is not defined
+>>> 
+[1]+  Stopped                 python
+megazor@uniblab:~$ 
+megazor@uniblab:~$ 
+megazor@uniblab:~$ 
+megazor@uniblab:~$ dir
+code	 dev_sched.py  examples.desktop  Pictures  Templates
+Desktop  Documents     Music		 Public    Videos
+dev	 Downloads     old_sched.py	 sched.py  x.x
+megazor@uniblab:~$ cd /code
+bash: cd: /code: No such file or directory
+
+
+
+
+megazor@uniblab:~$ cd code
+megazor@uniblab:~/code$ ls
+deb  python  rtl8821ce  rtlwifi_new
+megazor@uniblab:~/code$ mv python/ python_examples
+megazor@uniblab:~/code$ cd python_examples/
+megazor@uniblab:~/code/python_examples$ vi 01_hello_world.py
+megazor@uniblab:~/code/python_examples$ python 01_hello_world.py 
+Hello World
+megazor@uniblab:~/code/python_examples$ 
+megazor@uniblab:~/code/python_examples$ 
+megazor@uniblab:~/code/python_examples$ 
+megazor@uniblab:~/code/python_examples$ python
+Python 2.7.15+ (default, Oct  7 2019, 17:39:04) 
+[GCC 7.4.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> message = "Meet me tonight."
+>>> messag
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'messag' is not defined
+>>> message
+'Meet me tonight.'
+>>> message2 = "The clock strikes at midnight."
+>>> message2
+'The clock strikes at midnight.'
+>>> message2 = 'The clock strikes at midnight.'
+>>> message2
+'The clock strikes at midnight.'
+>>> message3='I'm lookinh got someone to share an adventure'
+  File "<stdin>", line 1
+    message3='I'm lookinh got someone to share an adventure'
+                ^
+SyntaxError: invalid syntax
+>>> message3='I\'m looking got someone to share an adventure'
+>>> message3
+"I'm looking got someone to share an adventure"
+>>> message3="I'm looking got someone to share an adventure"
+>>> message3
+"I'm looking got someone to share an adventure"
+>>> movie_quote = """One of my favorite
+... quotes from the Godfather is
+... "I'ma gonna die""""
+  File "<stdin>", line 3
+    "I'ma gonna die""""
+                      ^
+SyntaxError: EOL while scanning string literal
+>>> movie_quote = """One of my favorite
+... """
+>>> 
+>>> 2.7.3
+  File "<stdin>", line 1
+    2.7.3
+        ^
+SyntaxError: invalid syntax
+>>> # Typreds of numbers, int, long, float, complex
+... a=28
+>>> type(a)
+<type 'int'>
+>>> s
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 's' is not defined
+>>> a
+28
+>>> import sys
+>>> sys.maxint
+9223372036854775807
+>>> b=sys.maxint
+>>> type(c)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'c' is not defined
+>>> type(b)
+<type 'int'>
+>>> c=9223372036854775807L
+>>> type(c)
+<type 'long'>
+>>> f=1L
+>>> type(f)
+<type 'long'>
+>>> e=2.718281828
+>>> type(e)
+<type 'float'>
+>>> z=3 + 5.7j
+>>> type(z.real)
+<type 'float'>
+>>> type(z)
+<type 'complex'>
+>>> type z.imag
+  File "<stdin>", line 1
+    type z.imag
+         ^
+SyntaxError: invalid syntax
+>>> type(z.imag)
+<type 'float'>
+>>> 
+

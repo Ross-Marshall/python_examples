@@ -1,0 +1,202 @@
+megazor@uniblab:~$ cd code/python_examples/
+megazor@uniblab:~/code/python_examples$ ls
+0001_Tutorial.txt  01_hello_world.py  new_rep.txt  README.md
+megazor@uniblab:~/code/python_examples$ python
+Python 2.7.15+ (default, Oct  7 2019, 17:39:04) 
+[GCC 7.4.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import datetime
+>>> dir(datetime)
+['MAXYEAR', 'MINYEAR', '__doc__', '__name__', '__package__', 'date', 'datetime', 'datetime_CAPI', 'time', 'timedelta', 'tzinfo']
+>>> help(date0
+... )
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'date0' is not defined
+>>> help(date)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'date' is not defined
+>>> help(datetime.date)
+
+>>> 
+>>> gvn = datetime.date(1956, 2, 4)
+>>> gvn
+datetime.date(1956, 2, 4)
+>>> 
+>>> gvr = datetime.date(1956, 1, 31)
+>>> print(gvr)
+1956-01-31
+>>> print(gvr.year)
+1956
+>>> print(gvr.month)
+1
+>>> print(gvr.date)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'datetime.date' object has no attribute 'date'
+>>> print(gvr.day)
+31
+>>> mill = datetime.date(2000, 1, 1)
+>>> 
+>>> dt = datetime.timedelta(100)
+>>> dt
+datetime.timedelta(100)
+>>> print(mill + dt)
+2000-04-10
+>>> 
+>>> 
+>>> 
+>>> print(gvr.strftime("%A, %B %d, %Y))
+  File "<stdin>", line 1
+    print(gvr.strftime("%A, %B %d, %Y))
+                                      ^
+SyntaxError: EOL while scanning string literal
+>>> print(gvr.strftime("%A, %B %d, %Y"))
+Tuesday, January 31, 1956
+>>> 
+>>> 
+>>> 
+>>> 
+>>> message = "GVR was born on {:%A, %B %d, %Y}."
+>>> print(message.format(gvr))
+GVR was born on Tuesday, January 31, 1956.
+>>> launch_date = datetime.date(2017, 3, 30)
+>>> launch_time = datetime.time(22, 27, 0)
+>>> launch_datetime = datetime.datetime(2017, 3, 30, 22, 27, 0)
+>>> 
+>>> 
+>>> print(launch_date)
+2017-03-30
+>>> print(launch_time)
+22:27:00
+>>> print(launch_datetime)
+2017-03-30 22:27:00
+>>> now = datetime.datetime.today()
+>>> print(now)
+2020-02-17 21:03:23.447687
+>>> kim = datetime.date(1966, 12, 1)
+>>> now = datetime.datetime.today()
+>>> kim
+datetime.date(1966, 12, 1)
+>>> now
+datetime.datetime(2020, 2, 17, 21, 4, 51, 635053)
+>>> now = datetime.date.today()
+>>> print(now - kim)
+19436 days, 0:00:00
+>>> print(now - kim).year
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'datetime.timedelta' object has no attribute 'year'
+>>> print(now.year - kim.year)
+54
+>>> 
+>>> 
+>>> print(kim.microseconds)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'datetime.date' object has no attribute 'microseconds'
+>>> print(kim.microsecond)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'datetime.date' object has no attribute 'microsecond'
+>>> moon_landing = "7/20/1969"
+>>> moon_landing = datetime.datetime.strptime(moon_landing, "%m/%d/%Y")
+>>> print(moon_landing_datetime)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'moon_landing_datetime' is not defined
+>>> moon_landing = "7/20/1969"
+>>> moon_landing_datetime = datetime.datetime.strptime(moon_landing, "%m/%d/%Y") 
+>>> print(moon_landing_datetime)
+1969-07-20 00:00:00
+>>> print(type(moon_landing_datetime))
+<type 'datetime.datetime'>
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__', 'datetime', 'dt', 'gvn', 'gvr', 'kim', 'launch_date', 'launch_datetime', 'launch_time', 'message', 'mill', 'moon_landing', 'moon_landing_datetime', 'now']
+>>> def f():
+...   pass
+... 
+>>> f()
+>>> f
+<function f at 0x7f10c1ab9f50>
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__', 'datetime', 'dt', 'f', 'gvn', 'gvr', 'kim', 'launch_date', 'launch_datetime', 'launch_time', 'message', 'mill', 'moon_landing', 'moon_landing_datetime', 'now']
+>>> def ping():
+...   return "Ping!"
+... 
+>>> ping()
+'Ping!'
+>>> ping
+<function ping at 0x7f10c1996398>
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__', 'datetime', 'dt', 'f', 'gvn', 'gvr', 'kim', 'launch_date', 'launch_datetime', 'launch_time', 'message', 'mill', 'moon_landing', 'moon_landing_datetime', 'now', 'ping']
+>>> import math
+>>> dir(math)
+['__doc__', '__name__', '__package__', 'acos', 'acosh', 'asin', 'asinh', 'atan', 'atan2', 'atanh', 'ceil', 'copysign', 'cos', 'cosh', 'degrees', 'e', 'erf', 'erfc', 'exp', 'expm1', 'fabs', 'factorial', 'floor', 'fmod', 'frexp', 'fsum', 'gamma', 'hypot', 'isinf', 'isnan', 'ldexp', 'lgamma', 'log', 'log10', 'log1p', 'modf', 'pi', 'pow', 'radians', 'sin', 'sinh', 'sqrt', 'tan', 'tanh', 'trunc']
+>>> math.pi
+3.141592653589793
+>>> def volume(r):
+...    """Returns the volume of a sphere with radius r."""
+...    v = (4.0/3.0) * math.pi * r**3
+... 
+>>> def volume(r):
+...    """Returns the volume of a sphere with radius r."""
+...    v = (4.0/3.0) * math.pi * r**3
+...    return v
+... 
+>>> volume(2)
+33.510321638291124
+>>> volume()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: volume() takes exactly 1 argument (0 given)
+>>> volume(r)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'r' is not defined
+>>> def triangle_area(b, h):
+...   """Returns the area of a triangle with base b and height h."""
+...   return 0.5 * b * h
+... 
+>>> triangle_area(3,6)
+9.0
+>>> def cm(feet = 0, inches = 0):
+...   """Converts a length from feet and inches to centimeters."""
+...   inches_to_cm = inches * 2.54
+...   feet_to_cm = feet * 12 * 2.54
+...   return inches_to_cm + feet_to_cm
+... 
+>>> cm(feet = 5 )
+152.4
+>>> cm(inches = 70)
+177.8
+>>> cm(feet =5, inches = 9)
+175.26
+>>> 
+>>> 
+>>> 
+>>> def g(x = 0, y):
+...   return x + y
+... 
+  File "<stdin>", line 1
+SyntaxError: non-default argument follows default argument
+>>> def g(y, x = 0):
+...    return x + y
+... 
+>>> g(1,2)
+3
+>>> g(1)
+1
+>>> g(7, x=3)
+10
+>>> g()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: g() takes at least 1 argument (0 given)
+>>> g
+<function g at 0x7f10c19965f0>
+>>> type(g)
+<type 'function'>
+>>> 
+
