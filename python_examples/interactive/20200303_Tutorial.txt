@@ -1,0 +1,39 @@
+megazor@uniblab:~$ python
+Python 2.7.17 (default, Nov  7 2019, 10:07:09) 
+[GCC 7.4.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__']
+>>> def f():
+...    pass
+... 
+>>> f()
+>>> f
+<function f at 0x7f329c373950>
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__', 'f']
+>>> dir
+<built-in function dir>
+>>> def ping():
+...    return "Ping!"
+... 
+>>> ping()
+'Ping!'
+>>> x = ping()
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__', 'f', 'ping', 'x']
+>>> import math
+>>> math.pi
+3.141592653589793
+>>> def g(x = 0, y):
+...    return x + y
+... 
+  File "<stdin>", line 1
+SyntaxError: non-default argument follows default argument
+>>> def g(y, x = 0):
+...    return x + y
+... 
+>>> g(3,x=2)
+5
+>>> 
+
