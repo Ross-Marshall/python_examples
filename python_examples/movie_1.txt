@@ -1,0 +1,13 @@
+{
+  "title" : "Gattica",
+  "release_year" : 1997,
+  "is_awsome" : true,
+  "won_oscar" : false,
+  "actors" : ["Ethan Hawk", "Uma Thurman", "Alan Arkin", "Loren Dean"],
+  "budget" : null,
+  "credit" : { "director" : "Andrew Niccol",
+               "writer" : "Andrew Niccol",
+               "composer" : "Michael Nyman",
+               "cinematographer" : "Slawomir Idziak"
+             }
+}
