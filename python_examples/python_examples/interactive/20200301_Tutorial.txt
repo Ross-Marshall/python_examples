@@ -1,0 +1,302 @@
+megazor@uniblab:~$ cd code/
+megazor@uniblab:~/code$ cd pyq
+bash: cd: pyq: No such file or directory
+megazor@uniblab:~/code$ cd python_examples/
+megazor@uniblab:~/code/python_examples$ ls
+01_hello_world.py  if_then_3.py  interactive  README.md
+if_then_2.py       if_then.py    new_rep.txt
+megazor@uniblab:~/code/python_examples$ python
+Python 2.7.15+ (default, Oct  7 2019, 17:39:04) 
+[GCC 7.4.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> post = {"user_id":209, "message":"D5 E5 C5 C4 G4", "language":"English", "datetime":20200223T204712Z", "location":(44.233434, -102.377221)}
+  File "<stdin>", line 1
+    post = {"user_id":209, "message":"D5 E5 C5 C4 G4", "language":"English", "datetime":20200223T204712Z", "location":(44.233434, -102.377221)}
+                                                                                                       ^
+SyntaxError: invalid syntax
+>>> post = {"user_id":209, "message":"D5 E5 C5 C4 G4", "language":"English", "datetime":"20200223T204712Z", "location":(44.233434, -102.377221)}
+>>> post
+{'message': 'D5 E5 C5 C4 G4', 'user_id': 209, 'location': (44.233434, -102.377221), 'language': 'English', 'datetime': '20200223T204712Z'}
+>>> type(post)
+<type 'dict'>
+>>> post2 = dict(message="SS Cotopaxi", language="English")
+>>> print(post2)
+{'message': 'SS Cotopaxi', 'language': 'English'}
+>>> post2["user_id"]=209
+>>> post2["datetime"]="19770917T090909Z"
+>>> print(post2)
+{'message': 'SS Cotopaxi', 'user_id': 209, 'language': 'English', 'datetime': '19770917T090909Z'}
+>>> print(post['message'])
+D5 E5 C5 C4 G4
+>>> print(post2['location'])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 'location'
+>>> 'location' in post
+True
+>>> 'location' in post2
+False
+>>> try:
+...    print(post2['location'])
+... except KeyError:
+...    print('The post does not have a location')
+... 
+The post does not have a location
+>>> dir(post2)
+['__class__', '__cmp__', '__contains__', '__delattr__', '__delitem__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'clear', 'copy', 'fromkeys', 'get', 'has_key', 'items', 'iteritems', 'iterkeys', 'itervalues', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values', 'viewitems', 'viewkeys', 'viewvalues']
+>>> help(post2.get)
+
+>>> 
+>>> post2.get('location', None)
+>>> print(post2.get('location', None))
+None
+>>> print(post)
+{'message': 'D5 E5 C5 C4 G4', 'user_id': 209, 'location': (44.233434, -102.377221), 'language': 'English', 'datetime': '20200223T204712Z'}
+>>> for key in post.keys()
+  File "<stdin>", line 1
+    for key in post.keys()
+                         ^
+SyntaxError: invalid syntax
+>>> for key in post.keys():
+...    value=post[key]
+...    print(key, '=', value)
+... 
+('message', '=', 'D5 E5 C5 C4 G4')
+('user_id', '=', 209)
+('location', '=', (44.233434, -102.377221))
+('language', '=', 'English')
+('datetime', '=', '20200223T204712Z')
+>>> for key,value in post.items():
+...    print(key,"=",values)
+... 
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+NameError: name 'values' is not defined
+>>>    print(key,"=",value)
+  File "<stdin>", line 1
+    print(key,"=",value)
+    ^
+IndentationError: unexpected indent
+>>> for key,value in post.items():
+...    print(key)
+... 
+message
+user_id
+location
+language
+datetime
+>>>    print(key+","+value)
+  File "<stdin>", line 1
+    print(key+","+value)
+    ^
+IndentationError: unexpected indent
+>>> for key,value in post.items():
+...    print(key+","+value)
+... 
+message,D5 E5 C5 C4 G4
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+TypeError: cannot concatenate 'str' and 'int' objects
+>>>    print(str*=(key)+","+str(value))
+  File "<stdin>", line 1
+    print(str*=(key)+","+str(value))
+    ^
+IndentationError: unexpected indent
+>>> for key,value in post.items():
+...    print(str(key)+","+str(value))
+... 
+message,D5 E5 C5 C4 G4
+user_id,209
+location,(44.233434, -102.377221)
+language,English
+datetime,20200223T204712Z
+>>> prime_numbers = [2,3,5,7,11,13,17]
+>>> perfect_squares = [1,4,9,16,25,36]
+>>> print(len(prime_numbers))
+7
+>>> print(len(perfect_squares))
+6
+>>> for p in prime_numbers:
+...    print(p)
+... 
+2
+3
+5
+7
+11
+13
+17
+>>> dir(prime_numbers)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__delslice__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getslice__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__setslice__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+>>> 
+>>> 
+>>> 
+>>> dir(perfect_squares)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__delslice__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getslice__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__setslice__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+>>> perfect_squares = (1,4,9,16,25,36)
+>>> dir(perfect_squares)
+['__add__', '__class__', '__contains__', '__delattr__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__getslice__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'count', 'index']
+>>> dir(prime_numbers)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__delslice__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getslice__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__setslice__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+>>> import sys
+>>> import timeit
+>>>                                                                                                                                                                         
+... 
+>>> 
+>>> 
+>>> 
+>>> list_test = timeit.time(stmt="[1,2,3,4,5]", number=1000000)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'module' object is not callable
+>>> list_test = timeit.timeit(stmt="[1,2,3,4,5]", number=1000000)
+>>> tuple_test = timeit.timeit(stmt="[1,2,3,4,5]", number=1000000)
+>>> print(list_test)
+0.0835928916931
+>>> print(tuple_test)
+0.0817220211029
+>>> print(list_test)
+0.0835928916931
+>>> empty_tuple=()
+>>> test1=("a")
+>>> print(list_test)
+0.0835928916931
+>>> print(list_test)
+0.0835928916931
+>>> 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002
+2
+>>> class User:
+...    pass
+... 
+>>> user1 = User()
+>>> user1.first_name="Dave"
+>>> user1.last_name="Bowan)
+  File "<stdin>", line 1
+    user1.last_name="Bowan)
+                          ^
+SyntaxError: EOL while scanning string literal
+>>> user1.last_name="Bowan"
+>>> print(user1.first_name)
+Dave
+>>> print(user1.last_name)
+Bowan
+>>> first_name="Arthur"
+>>> last_name="Clarke"
+>>> first_name
+'Arthur'
+>>> user2= User()
+>>> user2.first_name='Frank'
+>>> user2.last_name='Poole'
+>>> print(user1.first_name, user1.last_name)
+('Dave', 'Bowan')
+>>> print(user2.first_name, user2.last_name)
+('Frank', 'Poole')
+>>> print(first_name, last_name)
+('Arthur', 'Clarke')
+>>> user1.age = 37
+>>> user2.favorite_book = "2001: A Space Odyssey"
+>>> print(user1)
+<__main__.User instance at 0x7fe30a3b8cb0>
+>>> print(str(user1))
+<__main__.User instance at 0x7fe30a3b8cb0>
+>>> print(user1.age)
+37
+>>> print(user2.age)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: User instance has no attribute 'age'
+>>> print(type(user1.age))
+<type 'int'>
+>>> class User:
+...    def __init__(self, full_name, birthday):
+...       self.name = full_name
+...       self.birthday = birthday # yyyymmdd
+... 
+>>>       # Extract first and last name
+...       name_pieces = full_name.split(" ")
+  File "<stdin>", line 2
+    name_pieces = full_name.split(" ")
+    ^
+IndentationError: unexpected indent
+>>>       self.first_name = name_pieces[0]
+  File "<stdin>", line 1
+    self.first_name = name_pieces[0]
+    ^
+IndentationError: unexpected indent
+>>>       last_name = name_pieces[-1]
+  File "<stdin>", line 1
+    last_name = name_pieces[-1]
+    ^
+IndentationError: unexpected indent
+>>> 
+>>> user = User('Dave Bowman', '19710315')
+>>> print(user.first_name)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: User instance has no attribute 'first_name'
+>>> print(user.last_name)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: User instance has no attribute 'last_name'
+>>> print(user.birthday)
+19710315
+>>> 
+>>> 
+>>> class User:
+...    def __init__(self, full_name, birthday):
+...       self.name = full_name
+...       self.birthday = birthday # yyyymmdd
+... 
+>>>       # Extract first and last name
+...       name_pieces = full_name.split(" ")
+  File "<stdin>", line 2
+    name_pieces = full_name.split(" ")
+    ^
+IndentationError: unexpected indent
+>>>       self.first_name = name_pieces[0]
+  File "<stdin>", line 1
+    self.first_name = name_pieces[0]
+    ^
+IndentationError: unexpected indent
+>>>       last_name = name_pieces[-1]
+  File "<stdin>", line 1
+    last_name = name_pieces[-1]
+    ^
+IndentationError: unexpected indent
+>>> 
+>>> user = User('Dave Bowman', '19710315')
+>>> print(user.first_name)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: User instance has no attribute 'first_name'
+>>> print(user.last_name)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: User instance has no attribute 'last_name'
+>>> print(user.birthday)
+19710315
+>>> class User:
+...    def __init__(self, full_name, birthday):
+...       self.name = full_name
+...       self.birthday = birthday # yyyymmdd
+... 
+>>>       # Extract first and last name
+...       name_pieces = full_name.split(" ")
+  File "<stdin>", line 2
+    name_pieces = full_name.split(" ")
+    ^
+IndentationError: unexpected indent
+>>>       self.first_name = name_pieces[0]
+  File "<stdin>", line 1
+    self.first_name = name_pieces[0]
+    ^
+IndentationError: unexpected indent
+>>>       last_name = name_pieces[-1]
+  File "<stdin>", line 1
+    last_name = name_pieces[-1]
+    ^
+IndentationError: unexpected indent
+>>> 
+>>> 
+>>> 
+

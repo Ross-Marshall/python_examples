@@ -1,0 +1,142 @@
+megazor@uniblab:~$ cd code/python_examples/
+megazor@uniblab:~/code/python_examples$ ls
+01_hello_world.py  if_then_3.py  interactive  README.md
+if_then_2.py       if_then.py    new_rep.txt
+megazor@uniblab:~/code/python_examples$ python
+Python 2.7.15+ (default, Oct  7 2019, 17:39:04) 
+[GCC 7.4.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> example = set()
+>>> dir(example)
+['__and__', '__class__', '__cmp__', '__contains__', '__delattr__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__iand__', '__init__', '__ior__', '__isub__', '__iter__', '__ixor__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__or__', '__rand__', '__reduce__', '__reduce_ex__', '__repr__', '__ror__', '__rsub__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__xor__', 'add', 'clear', 'copy', 'difference', 'difference_update', 'discard', 'intersection', 'intersection_update', 'isdisjoint', 'issubset', 'issuperset', 'pop', 'remove', 'symmetric_difference', 'symmetric_difference_update', 'union', 'update']
+>>> help(example.add)
+
+>>> example.add(42)
+>>> example.add(False)
+>>> example.add(3.14159)
+>>> example.add("Thorium")
+>>> example
+set([False, 3.14159, 42, 'Thorium'])
+>>> 189/60
+3
+>>> len(example)
+4
+>>> help(example.remove)
+
+>>> example.remove(42)
+>>> example
+set([False, 3.14159, 'Thorium'])
+>>> example.remove(50)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 50
+>>> help(example.discard)
+
+>>> example2 = set([28, True, 2.71828, "Helium")]
+  File "<stdin>", line 1
+    example2 = set([28, True, 2.71828, "Helium")]
+                                               ^
+SyntaxError: invalid syntax
+>>> example2 = set([28, True, 2.71828, "Helium"])
+>>> len(example2)
+4
+>>> odds = set([1,3,5,7,9])
+>>> evens = set([2,4,6,8,10])
+>>> primes = set([2,3,5,7])
+>>> composites = set([4, 6, 8, 9, 10])
+>>> odds.union(evens)
+set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+>>> odds.union(odds)
+set([7, 1, 3, 5, 9])
+>>> evens.union(odds)
+set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+>>> odds
+set([1, 3, 9, 5, 7])
+>>> evens
+set([8, 2, 4, 10, 6])
+>>> odd
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'odd' is not defined
+>>> odds.intersection(primes)
+set([3, 5, 7])
+>>> primes.intersection(evens)
+set([2])
+>>> evens.intersection(odds)
+set([])
+>>> primes.unions(composits)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'set' object has no attribute 'unions'
+>>> primes.unions(composites)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'set' object has no attribute 'unions'
+>>> primes.union(composites)
+set([2, 3, 4, 5, 6, 7, 8, 9, 10])
+>>> 2 in primes
+True
+>>> 6 in odds
+False
+>>> 9 not in evens
+True
+>>> dir(primes)
+['__and__', '__class__', '__cmp__', '__contains__', '__delattr__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__iand__', '__init__', '__ior__', '__isub__', '__iter__', '__ixor__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__or__', '__rand__', '__reduce__', '__reduce_ex__', '__repr__', '__ror__', '__rsub__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__xor__', 'add', 'clear', 'copy', 'difference', 'difference_update', 'discard', 'intersection', 'intersection_update', 'isdisjoint', 'issubset', 'issuperset', 'pop', 'remove', 'symmetric_difference', 'symmetric_difference_update', 'union', 'update']
+>>> 
+>>> 
+>>> example = list()
+>>> example = []
+>>> primes
+set([2, 3, 5, 7])
+>>> primes = [2,3,5,7,11,13]
+>>> primes
+[2, 3, 5, 7, 11, 13]
+>>> primes.append(17)
+>>> primes.append(19)
+>>> primes
+[2, 3, 5, 7, 11, 13, 17, 19]
+>>> 
+>>> 
+>>> 
+>>> primes(0)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'list' object is not callable
+>>> primes[0]
+2
+>>> primes[1]
+3
+>>> primes[-4]
+11
+>>> primes[-2]
+17
+>>> primes[-9]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list index out of range
+>>> primes
+[2, 3, 5, 7, 11, 13, 17, 19]
+>>> primes[2:5]
+[5, 7, 11]
+>>> primes[0:6]
+[2, 3, 5, 7, 11, 13]
+>>> example = [128, True, "Alpha", 1.732, [64, False]]
+>>> rolls = [4,7,2,7,12,4,7]
+>>> rolls
+[4, 7, 2, 7, 12, 4, 7]
+>>> numbers = [1,2,3]
+>>> letters = ['a', 'b', 'c']
+>>> letters + numbers
+['a', 'b', 'c', 1, 2, 3]
+>>> dir(numbers0
+... 
+... )
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'numbers0' is not defined
+>>> 
+>>> 
+>>> 
+>>> 
+>>> a
+

@@ -1,0 +1,159 @@
+megazor@uniblab:~$ python
+Python 2.7.17 (default, Nov  7 2019, 10:07:09) 
+[GCC 7.4.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__']
+>>> def f():
+...    pass
+... 
+>>> f()
+>>> f
+<function f at 0x7f329c373950>
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__', 'f']
+>>> dir
+<built-in function dir>
+>>> def ping():
+...    return "Ping!"
+... 
+>>> ping()
+'Ping!'
+>>> x = ping()
+>>> dir()
+['__builtins__', '__doc__', '__name__', '__package__', 'f', 'ping', 'x']
+>>> import math
+>>> math.pi
+3.141592653589793
+>>> def g(x = 0, y):
+...    return x + y
+... 
+  File "<stdin>", line 1
+SyntaxError: non-default argument follows default argument
+>>> def g(y, x = 0):
+...    return x + y
+... 
+>>> g(3,x=2)
+5
+>>> quit
+Use quit() or Ctrl-D (i.e. EOF) to exit
+>>> quit()
+megazor@uniblab:~$ python
+Python 2.7.17 (default, Nov  7 2019, 10:07:09) 
+[GCC 7.4.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import json
+>>> json_file = open('movie_1.txt", "r", encoding="utf-8")
+  File "<stdin>", line 1
+    json_file = open('movie_1.txt", "r", encoding="utf-8")
+                                                         ^
+SyntaxError: EOL while scanning string literal
+>>> json_file = open("movie_1.txt", "r", encoding="utf-8")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'encoding' is an invalid keyword argument for this function
+>>> json_file = open("movie_1.txt", "r", encoding="utf-8")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'encoding' is an invalid keyword argument for this function
+>>> dir
+<built-in function dir>
+>>> help(json)
+
+>>> json_file = open("movie_1.txt", "r")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IOError: [Errno 2] No such file or directory: 'movie_1.txt'
+>>> quit
+Use quit() or Ctrl-D (i.e. EOF) to exit
+>>> quit()
+megazor@uniblab:~$ ls
+code     dev_sched.py  examples.desktop  Pictures  PycharmProjects  Videos
+Desktop  Documents     Music             Public    sched.py         x.x
+dev      Downloads     old_sched.py      PyCharm   Templates
+megazor@uniblab:~$ pwd
+/home/megazor
+megazor@uniblab:~$ cd code/
+megazor@uniblab:~/code$ ls
+deb  python_examples  rtl8821ce  rtlwifi_new
+megazor@uniblab:~/code$ cd python_examples/
+megazor@uniblab:~/code/python_examples$ ls
+01_hello_world.py      functions.py  if_then.py   new_rep.txt
+class_and_objects.py   if_then_2.py  interactive  prime_numbers.py
+class_and_objects.pyc  if_then_3.py  movie_1.txt  README.md
+megazor@uniblab:~/code/python_examples$ python
+Python 2.7.17 (default, Nov  7 2019, 10:07:09) 
+[GCC 7.4.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import json
+>>> json_file = open("movie_1.txt", "r", encodin
+... 4
+  File "<stdin>", line 2
+    4
+    ^
+SyntaxError: invalid syntax
+>>> json_file = open("movie_1.txt", "r", encoding="utf-8")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'encoding' is an invalid keyword argument for this function
+>>> json_file = open("movie_1.txt", "r","utf-8")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: an integer is required
+>>> json_file = open("movie_1.txt", "r")
+>>> movie = json.loa
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute 'loa'
+>>> movie = json.load(json_file)
+>>> movie
+{u'won_oscar': False, u'release_year': 1997, u'title': u'Gattica', u'budget': None, u'credit': {u'director': u'Andrew Niccol', u'writer': u'Andrew Niccol', u'cinematographer': u'Slawomir Idziak', u'composer': u'Michael Nyman'}, u'actors': [u'Ethan Hawk', u'Uma Thurman', u'Alan Arkin', u'Loren Dean'], u'is_awsome': True}
+>>> type(movie)
+<type 'dict'>
+>>> json_file.close()
+>>> movie['title']
+u'Gattica'
+>>> value = """
+... {"title" : "Tron: Legacy",
+...  "composer" : "Daft Punk",
+...  "release_year" : 2010,
+...  "budget" : 170000000,
+...  "actors" : null,
+...  "won_oscar" : false
+... }"""
+>>> value
+'\n{"title" : "Tron: Legacy",\n "composer" : "Daft Punk",\n "release_year" : 2010,\n "budget" : 170000000,\n "actors" : null,\n "won_oscar" : false\n}'
+>>> tron = json.loads(value)
+>>> tron
+{u'won_oscar': False, u'release_year': 2010, u'title': u'Tron: Legacy', u'budget': 170000000, u'actors': None, u'composer': u'Daft Punk'}
+>>> json.dumps(movie)
+'{"won_oscar": false, "release_year": 1997, "title": "Gattica", "budget": null, "credit": {"director": "Andrew Niccol", "writer": "Andrew Niccol", "cinematographer": "Slawomir Idziak", "composer": "Michael Nyman"}, "actors": ["Ethan Hawk", "Uma Thurman", "Alan Arkin", "Loren Dean"], "is_awsome": true}'
+>>> movie2 = ()
+>>> movie2["title"]="Minority Report"
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+>>> movie2 = {}
+>>> movie2["title"]="Minority Report"
+>>> movie2["director"]="Stephen Spielberg"
+>>> movie2["composer"]="John Williams"
+>>> movie2["actors"]=["Tom Cruise", "Colin Ferrell", "Samantha Morton", "Max von Sydow"]
+>>> movie2["is_awesome"]= True
+>>> movie2["budget"] 102000000
+  File "<stdin>", line 1
+    movie2["budget"] 102000000
+                             ^
+SyntaxError: invalid syntax
+>>> movie2["budget"] =102000000
+>>> movie2["cinematographer"]="Janusz Kami\u0144ski"
+>>> movie2
+{'title': 'Minority Report', 'budget': 102000000, 'director': 'Stephen Spielberg', 'actors': ['Tom Cruise', 'Colin Ferrell', 'Samantha Morton', 'Max von Sydow'], 'composer': 'John Williams', 'cinematographer': 'Janusz Kami\\u0144ski', 'is_awesome': True}
+>>> file2 = open('movie_2.txt', 'w', encoding='utf-8')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'encoding' is an invalid keyword argument for this function
+>>> file2 = open('movie_2.txt', 'w')
+>>> json.dump(movie2, file2)
+>>> file2.close()
+>>> 
+
