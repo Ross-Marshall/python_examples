@@ -16,11 +16,12 @@ from graphics import *
 from Tkinter import *
 import tkMessageBox
 import math
+import time
 
 
 class GameOfLife:
 
-    max_x = 200  #  1200
+    max_x = 200  # 1200
     max_y = 100  # 700
     step = 10
     start = step
@@ -98,28 +99,28 @@ class GameOfLife:
 
     def check_up_y(self, j):
         """Check y cell above the current cell."""
-        j = j + 1
+        j = j + self.step
         if j > self.max_y - self.step:
             j = 0
         return j
 
     def check_down_y(self, j):
         """Check y cell below the current cell."""
-        j = j + 1
+        j = j + self.step
         if j < 0:
             j = self.max_y - self.step
         return j
 
     def check_left_x(self, i):
         """Check the x cell to the left of the current cell."""
-        i = i - 1
+        i = i - self.step
         if i < 0:
             i = self.max_x - self.step
         return i
 
     def check_right_x(self, i):
         """Check the x cell to the right of the current cell."""
-        i = i + 1
+        i = i + self.step
         if i > self.max_x - self.step:
             i = 0
         return i
@@ -189,18 +190,21 @@ class GameOfLife:
         return neighbor_count
 
     def refresh_grid(self):
+        """Update the grid array that keeps track of the state."""
         self.status_grid = self.next_grid
         for x in range(0, self.max_x - self.step, self.step):
             for y in range(0, self.max_y - self.step, self.step):
+                print('refresh_grid ===> DEBUG: x = ' + str(x) + ' y = ' + str(y))
                 low_point = Point(x, y)
-                high_point = Point(x + 10, y + 10)
+                high_point = Point(x + self.step, y + self.step)
                 if self.status_grid[x][y] == 1:
                     self.cell(low_point, high_point)
                 else:
                     self.clear_cell(low_point, high_point)
 
     def mouse_test(self):
-        while 1 == 1:
+        setup_grid = 1
+        while 1 == setup_grid:
             point = self.win.getMouse()
             low_point = Point(self.round_down(point.x), self.round_down(point.y))
             high_point = Point(self.round_up(point.x), self.round_up(point.y))
@@ -214,8 +218,9 @@ class GameOfLife:
                 self.clear_cell(low_point, high_point)
                 self.status_grid[matrix_x][matrix_y] = 0
             if matrix_x == 0 and matrix_y == 0:
-                for x in range(self.max_x):
-                    for y in range(self.max_y):
+                for x in range(0, self.max_x - self.step, self.step):
+                    for y in range(0, self.max_y - self.step, self.step):
+                        print('DEBUG if matrix loop x = ' + str(x) + ' y = ' + str(y))
                         live = self.status_grid[x][y]
                         count = self.count_neighbors(x, y)
                         if count < 2 and live == 1:
@@ -229,6 +234,10 @@ class GameOfLife:
                         else:
                             self.next_grid[x][y] = self.status_grid[x][y]
                 self.refresh_grid()
+                setup_grid = 0
+        while 1 == 1:
+            self.refresh_grid()
+
 
     def main(self):
 
