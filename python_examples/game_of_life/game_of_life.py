@@ -217,7 +217,7 @@ class GameOfLife:
             else:
                 self.clear_cell(low_point, high_point)
                 self.status_grid[matrix_x][matrix_y] = 0
-            if matrix_x == 0 and matrix_y == 0:
+            if matrix_x == 0 and matrix_y == 0 and setup_grid == 1:
                 for x in range(0, self.max_x - self.step, self.step):
                     for y in range(0, self.max_y - self.step, self.step):
                         print('DEBUG if matrix loop x = ' + str(x) + ' y = ' + str(y))
