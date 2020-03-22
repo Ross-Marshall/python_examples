@@ -21,8 +21,8 @@ import time
 
 class GameOfLife:
 
-    max_x = 200  # 1200
-    max_y = 100  # 700
+    max_x = 100  # 1200
+    max_y = 50  # 700
     step = 10
     start = step
     line_width = 1
@@ -223,6 +223,8 @@ class GameOfLife:
                         print('DEBUG if matrix loop x = ' + str(x) + ' y = ' + str(y))
                         live = self.status_grid[x][y]
                         count = self.count_neighbors(x, y)
+                        tkMessageBox.showinfo(title="Debug", message="(x,y) = (" + str(x) + ',' + str(y) +
+                                                                     ') count = ' + str(count))
                         if count < 2 and live == 1:
                             self.next_grid[x][y] = 0
                         elif count in [2, 3] and live == 1:
