@@ -17,12 +17,14 @@ from Tkinter import *
 import tkMessageBox
 import math
 import time
+import logging
+import time
 
 
 class GameOfLife:
 
-    max_x = 100  # 1200
-    max_y = 50  # 700
+    max_x = 40  # 1200
+    max_y = 30  # 700
     step = 10
     start = step
     line_width = 1
@@ -31,6 +33,11 @@ class GameOfLife:
     next_grid = None
     i = 0
     j = 0
+
+    # Create logger
+    logging.basicConfig(filename='life_log.log', level=logging.DEBUG)
+
+    logger = logging.getLogger()
 
     def __init__(self):
         """Initialize the Class."""
@@ -100,7 +107,7 @@ class GameOfLife:
     def check_up_y(self, j):
         """Check y cell above the current cell."""
         j = j + self.step
-        if j > self.max_y - self.step:
+        if j >= self.max_y - self.step:
             j = 0
         return j
 
@@ -121,16 +128,16 @@ class GameOfLife:
     def check_right_x(self, i):
         """Check the x cell to the right of the current cell."""
         i = i + self.step
-        if i > self.max_x - self.step:
+        if i >= self.max_x - self.step:
             i = 0
         return i
 
     def upper_left(self, x, y):
         """Get value of the upper left cell."""
-        print('DEBUG x = ' + str(x) + ' y = ' + str(y))
+        self.logger.debug('x = ' + str(x) + ' y = ' + str(y))
         i = self.check_left_x(x)
         j = self.check_up_y(y)
-        print('DEBUG i = ' + str(i) + ' j = ' + str(j))
+        self.logger.debug('i = ' + str(i) + ' j = ' + str(j))
         return self.status_grid[i][j]
 
     def above(self, x, y):
@@ -155,8 +162,8 @@ class GameOfLife:
         """Get value of the cell to the lower right"""
         i = self.check_right_x(x)
         j = self.check_down_y(y)
-        print('DEBUG i = ' + str(i))
-        print('DEBUG j = ' + str(j))
+        self.logger.debug('i = ' + str(i))
+        self.logger.debug('j = ' + str(j))
         return self.status_grid[i][j]
 
     def below(self, x, y):
@@ -194,7 +201,7 @@ class GameOfLife:
         self.status_grid = self.next_grid
         for x in range(0, self.max_x - self.step, self.step):
             for y in range(0, self.max_y - self.step, self.step):
-                print('refresh_grid ===> DEBUG: x = ' + str(x) + ' y = ' + str(y))
+                self.logger.debug('refresh_grid ===> x = ' + str(x) + ' y = ' + str(y))
                 low_point = Point(x, y)
                 high_point = Point(x + self.step, y + self.step)
                 if self.status_grid[x][y] == 1:
@@ -208,7 +215,7 @@ class GameOfLife:
             point = self.win.getMouse()
             low_point = Point(self.round_down(point.x), self.round_down(point.y))
             high_point = Point(self.round_up(point.x), self.round_up(point.y))
-            print('low_point = ' + str(low_point) + ' high_point = ' + str(high_point))
+            self.logger.debug('low_point = ' + str(low_point) + ' high_point = ' + str(high_point))
             matrix_x = int(low_point.x)
             matrix_y = int(low_point.y)
             if self.status_grid[matrix_x][matrix_y] == 0:
@@ -220,7 +227,7 @@ class GameOfLife:
             if matrix_x == 0 and matrix_y == 0 and setup_grid == 1:
                 for x in range(0, self.max_x - self.step, self.step):
                     for y in range(0, self.max_y - self.step, self.step):
-                        print('DEBUG if matrix loop x = ' + str(x) + ' y = ' + str(y))
+                        self.logger.debug('if matrix loop x = ' + str(x) + ' y = ' + str(y))
                         live = self.status_grid[x][y]
                         count = self.count_neighbors(x, y)
                         tkMessageBox.showinfo(title="Debug", message="(x,y) = (" + str(x) + ',' + str(y) +
