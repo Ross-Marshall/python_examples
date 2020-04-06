@@ -23,9 +23,12 @@ import time
 
 class GameOfLife:
 
-    max_x = 40  # 1200
-    max_y = 30  # 700
+    max_matrix_x = 4  # 120
+    max_matrix_y = 3  # 70
     step = 10
+    max_x = max_matrix_x * step
+    max_y = max_matrix_y * step
+
     start = step
     line_width = 1
     win = None
@@ -45,7 +48,7 @@ class GameOfLife:
         self.next_grid = self.initialze_status_grid()
 
     def initialze_status_grid(self):
-        return [[0 for self.i in range(self.max_y)] for self.j in range(self.max_x)]
+        return [[0 for self.i in range(self.max_matrix_y)] for self.j in range(self.max_matrix_x)]
 
     def round_up(self, x):
         """Round up to the nearest step-th"""
@@ -113,9 +116,9 @@ class GameOfLife:
 
     def check_down_y(self, j):
         """Check y cell below the current cell."""
-        j = j + self.step
+        j = j - self.step
         if j < 0:
-            j = self.max_y - self.step
+            j = self.max_y
         return j
 
     def check_left_x(self, i):
@@ -141,6 +144,7 @@ class GameOfLife:
                           ' : (i, j) = (' +
                           str(i) + ', ' +
                           str(j) + ')')
+        self.logger.debug("(i,j) = (" + str(x) + "," + str(y) + ") " + str(self.status_grid))
         self.logger.debug('cell value = ' + str(self.status_grid[i][j]))
 
     def upper_left(self, x, y):
@@ -228,7 +232,8 @@ class GameOfLife:
     def mouse_test(self):
         setup_grid = 1
         while 1 == setup_grid:
-            point = self.win.getMouse()
+            point = self.win.get
+            ouse()
             low_point = Point(self.round_down(point.x), self.round_down(point.y))
             high_point = Point(self.round_up(point.x), self.round_up(point.y))
             self.logger.debug('low_point = ' + str(low_point) + ' high_point = ' + str(high_point))
@@ -242,6 +247,7 @@ class GameOfLife:
                 self.status_grid[matrix_x][matrix_y] = 0
             if matrix_x == 0 and matrix_y == 0 and setup_grid == 1:
                 for x in range(0, self.max_x + self.step, self.step):
+
                     for y in range(0, self.max_y + self.step, self.step):
                         self.logger.debug('-------------------- check neighbor loop ---------')
                         self.logger.debug('if matrix loop x = ' + str(x) + ' y = ' + str(y))
