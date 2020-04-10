@@ -232,8 +232,7 @@ class GameOfLife:
     def mouse_test(self):
         setup_grid = 1
         while 1 == setup_grid:
-            point = self.win.get
-            ouse()
+            point = self.win.getMouse()
             low_point = Point(self.round_down(point.x), self.round_down(point.y))
             high_point = Point(self.round_up(point.x), self.round_up(point.y))
             self.logger.debug('low_point = ' + str(low_point) + ' high_point = ' + str(high_point))
