@@ -112,28 +112,28 @@ class GameOfLife:
         j = j + self.step
         if j >= self.max_y - self.step:
             j = 0
-        return j
+        return self.scale(j)
 
     def check_down_y(self, j):
         """Check y cell below the current cell."""
         j = j - self.step
         if j < 0:
             j = self.max_y
-        return j
+        return self.scale(j)
 
     def check_left_x(self, i):
         """Check the x cell to the left of the current cell."""
         i = i - self.step
         if i < 0:
             i = self.max_x - self.step
-        return i
+        return self.scale(i)
 
     def check_right_x(self, i):
         """Check the x cell to the right of the current cell."""
         i = i + self.step
         if i >= self.max_x - self.step:
             i = 0
-        return i
+        return self.scale(i)
 
     def log_position(self, cell_name, x, y, i, j):
         self.logger.debug(cell_name +
@@ -154,9 +154,12 @@ class GameOfLife:
         self.log_position('upper_left', x, y, i, j)
         return self.status_grid[i][j]
 
+    def scale(self, v):
+        return int(v/self.step)
+
     def above(self, x, y):
         """Get value of the cell above."""
-        i = x
+        i = self.scale(x)
         j = self.check_up_y(y)
         self.log_position('above', x, y, i, j)
         return self.status_grid[i][j]
@@ -171,7 +174,7 @@ class GameOfLife:
     def right(self, x, y):
         """Get value of the cell to the right."""
         i = self.check_right_x(x)
-        j = y
+        j = self.scale(y)
         self.log_position('right', x, y, i, j)
         return self.status_grid[i][j]
 
@@ -199,7 +202,7 @@ class GameOfLife:
     def left(self, x, y):
         """Get the value of the cell to the left."""
         i = self.check_left_x(x)
-        j = y
+        j = self.scale(y)
         self.log_position('left', x, y, i, j)
         return self.status_grid[i][j]
 
@@ -236,8 +239,9 @@ class GameOfLife:
             low_point = Point(self.round_down(point.x), self.round_down(point.y))
             high_point = Point(self.round_up(point.x), self.round_up(point.y))
             self.logger.debug('low_point = ' + str(low_point) + ' high_point = ' + str(high_point))
-            matrix_x = int(low_point.x)
-            matrix_y = int(low_point.y)
+            matrix_x = self.scale(low_point.x)
+            matrix_y = self.scale(low_point.y)
+            self.logger.debug('matrix_x = ' + str(matrix_x) + ' matrix_y= ' + str(matrix_y))
             if self.status_grid[matrix_x][matrix_y] == 0:
                 self.cell(low_point, high_point)
                 self.status_grid[matrix_x][matrix_y] = 1
