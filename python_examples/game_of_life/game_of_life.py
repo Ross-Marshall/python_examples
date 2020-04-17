@@ -117,14 +117,14 @@ class GameOfLife:
     def check_down_y(self, j):
         """Check y cell below the current cell."""
         j = j - self.step
-        if j < 0:
+        if j <= 0:
             j = self.max_y
         return self.scale(j)
 
     def check_left_x(self, i):
         """Check the x cell to the left of the current cell."""
         i = i - self.step
-        if i < 0:
+        if i <= 0:
             i = self.max_x - self.step
         return self.scale(i)
 
@@ -136,6 +136,9 @@ class GameOfLife:
         return self.scale(i)
 
     def log_position(self, cell_name, x, y, i, j):
+        rows = len(self.status_grid)
+        cols = len(self.status_grid[0])
+        self.logger.debug('status_grid [rows][columns] = ['+str(rows) + '][' + str(cols) + ']')
         self.logger.debug(cell_name +
                           ' : (x, y) = (' +
                           str(x) + ', ' +
@@ -182,7 +185,7 @@ class GameOfLife:
         """Get value of the cell to the lower right"""
         i = self.check_right_x(x)
         j = self.check_down_y(y)
-        self.log_position('lower_left', x, y, i, j)
+        self.log_position('lower_right', x, y, i, j)
         return self.status_grid[i][j]
 
     def below(self, x, y):
