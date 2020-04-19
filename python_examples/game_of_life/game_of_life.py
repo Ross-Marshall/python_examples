@@ -25,6 +25,7 @@ class GameOfLife:
 
     max_matrix_x = 4  # 120
     max_matrix_y = 3  # 70
+
     step = 10
     max_x = max_matrix_x * step
     max_y = max_matrix_y * step
@@ -48,7 +49,7 @@ class GameOfLife:
         self.next_grid = self.initialze_status_grid()
 
     def initialze_status_grid(self):
-        return [[0 for self.i in range(self.max_matrix_y)] for self.j in range(self.max_matrix_x)]
+        return [[0 for self.i in range(self.max_matrix_x)] for self.j in range(self.max_matrix_y)]
 
     def round_up(self, x):
         """Round up to the nearest step-th"""
