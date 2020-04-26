@@ -318,7 +318,7 @@ class GraphWin(tk.Canvas):
         x,y = self.toWorld(self.mouseX, self.mouseY)
         self.mouseX = None
         self.mouseY = None
-        return Point(x,y)
+        return Point(x, y)
 
     def checkMouse(self):
         """Return last mouse click or None if mouse has
