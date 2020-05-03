@@ -220,13 +220,13 @@ class GameOfLife:
     def refresh_grid(self):
         """Update the grid array that keeps track of the state."""
         self.status_grid = self.next_grid
-        for x in range(0, self.max_x - self.step, self.step):
-            for y in range(0, self.max_y + self.step, self.step):
+        for y in range(0, self.max_y, self.step):
+            for x in range(0, self.max_x, self.step):
                 self.logger.debug('------------------------------------')
                 self.logger.debug('refresh_grid ===> x = ' + str(x) + ' y = ' + str(y))
                 low_point = Point(x, y)
                 high_point = Point(x + self.step, y + self.step)
-                if self.status_grid[x][y] == 1:
+                if self.status_grid[self.scale(x)][self.scale(y)] == 1:
                     self.cell(low_point, high_point)
                 else:
                     self.clear_cell(low_point, high_point)
@@ -250,8 +250,8 @@ class GameOfLife:
                 self.clear_cell(low_point, high_point)
                 self.status_grid[matrix_x][matrix_y] = 0
             if matrix_x == 0 and matrix_y == 0 and setup_grid == 1:
-                for x in range(0, self.max_x, self.step):
-                    for y in range(0, self.max_y, self.step):
+                for y in range(0, self.max_y, self.step):
+                    for x in range(0, self.max_x, self.step):
                         x_scale = self.scale(x)
                         y_scale = self.scale(y)
                         self.logger.debug('-------------------- check neighbor loop ---------')
@@ -275,7 +275,7 @@ class GameOfLife:
                 setup_grid = 0
         while 1 == 1:
             self.refresh_grid()
-            self.logger.debug('Generation: ' + self.generation)
+            self.logger.debug('Generation: ' + str(self.generation))
             self.generation += 1
 
     def show_grids(self):
