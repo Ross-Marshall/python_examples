@@ -24,8 +24,8 @@ import time
 
 class GameOfLife:
 
-    max_matrix_x = 5  # 120
-    max_matrix_y = 3  # 70
+    max_matrix_x = 12  # 120
+    max_matrix_y = 7  # 70
 
     step = 10
     max_x = max_matrix_x * step
@@ -41,7 +41,7 @@ class GameOfLife:
     generation = 0
 
     # Create logger
-    logging.basicConfig(filename='life_log.log', level=logging.DEBUG)
+    logging.basicConfig(filename='life_log.log', level=logging.INFO)
 
     logger = logging.getLogger()
 
@@ -220,8 +220,8 @@ class GameOfLife:
     def refresh_grid(self):
         """Update the grid array that keeps track of the state."""
         self.status_grid = self.next_grid
-        for y in range(0, self.max_y, self.step):
-            for x in range(0, self.max_x, self.step):
+        for y in range(0, self.max_y - self.step, self.step):
+            for x in range(0, self.max_x - self.step, self.step):
                 self.logger.debug('------------------------------------')
                 self.logger.debug('refresh_grid ===> x = ' + str(x) + ' y = ' + str(y))
                 low_point = Point(x, y)
@@ -231,9 +231,8 @@ class GameOfLife:
                 else:
                     self.clear_cell(low_point, high_point)
 
-    def mouse_test(self):
-        setup_grid = 1
-        while 1 == setup_grid:
+    def update_grid(self, setup_grid):
+        while True:
             point = self.win.getMouse()
             low_point = Point(self.round_down(point.x), self.round_down(point.y))
             high_point = Point(self.round_up(point.x), self.round_up(point.y))
@@ -260,22 +259,27 @@ class GameOfLife:
                         count = self.count_neighbors(x, y)
                         # tkMessageBox.showinfo(title="Debug", message="(x,y) = (" + str(x) +
                         #                                             ',' + str(y) + ') count = ' + str(count))
-                        if count < 2 and live == 1:
+                        if count < 2:
                             self.next_grid[x_scale][y_scale] = 0
-                        elif count in [2, 3] and live == 1:
+                        elif count in [2, 3]:
                             self.next_grid[x_scale][y_scale] = 1
-                        elif count > 3 and live == 1:
+                        elif count > 3:
                             self.next_grid[x_scale][y_scale] = 0
-                        elif count == 3 and live == 0:
-                            self.next_grid[x_scale][y_scale] = 1
                         else:
                             self.next_grid[x_scale][y_scale] = self.status_grid[x_scale][y_scale]
+                return
 
-                self.refresh_grid()
-                setup_grid = 0
+    def mouse_test(self):
+        setup_grid = 1
+
+        self.update_grid(setup_grid)
+        self.refresh_grid()
+        setup_grid = 0
+
         while 1 == 1:
             self.refresh_grid()
-            self.logger.debug('Generation: ' + str(self.generation))
+            self.update_grid(setup_grid)
+            self.logger.info('Generation: ' + str(self.generation))
             self.generation += 1
 
     def show_grids(self):
