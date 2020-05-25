@@ -17,15 +17,13 @@ from Tkinter import *
 import tkMessageBox
 
 import math
-import time
 import logging
-import time
 
 
 class GameOfLife:
 
-    max_matrix_x = 12  # 120
-    max_matrix_y = 7  # 70
+    max_matrix_x = 120
+    max_matrix_y = 70
 
     step = 10
     max_x = max_matrix_x * step
@@ -138,35 +136,17 @@ class GameOfLife:
             i = 0
         return self.scale(i)
 
-    """def log_position(self, cell_name, x, y, i, j):
-        rows = len(self.status_grid)
-        cols = len(self.status_grid[0])
-        self.logger.debug('status_grid [rows][columns] = [' + str(rows) + '][' + str(cols) + ']')
-        self.logger.debug(cell_name +
-                          ' : (x, y) = (' +
-                          str(x) + ', ' +
-                          str(y) + ')')
-        self.logger.debug(cell_name +
-                          ' : (i, j) = (' +
-                          str(i) + ', ' +
-                          str(j) + ')')
-        self.logger.debug("(i,j) = (" + str(i) + "," + str(j) + ") " + str(self.status_grid))
-        self.logger.debug('cell value = ' + str(self.status_grid[i][j]))
-        """
-
     def scale(self, v):
         return int(v/self.step)
 
     def upper_left(self, x, y):
         """Get value of the upper left cell."""
         j, i = self.check_up_y(y), self.check_left_x(x)
-        # self.log_position('upper_left', x, y, i, j)
         return self.status_grid[i][j]
 
     def above(self, x, y):
         """Get value of the cell above."""
         j, i = self.check_up_y(y), self.scale(x)
-        # self.log_position('above', x, y, i, j)
         return self.status_grid[i][j]
 
     def upper_right(self, x, y):
@@ -178,31 +158,26 @@ class GameOfLife:
     def right(self, x, y):
         """Get value of the cell to the right."""
         j, i = self.scale(y), self.check_right_x(x)
-        # self.log_position('right', x, y, i, j)
         return self.status_grid[i][j]
 
     def lower_right(self, x, y):
         """Get value of the cell to the lower right"""
         j, i = self.check_down_y(y), self.check_right_x(x)
-        # self.log_position('lower_right', x, y, i, j)
         return self.status_grid[i][j]
 
     def below(self, x, y):
         """Get the value of the cell below."""
         j, i = self.check_down_y(y), self.scale(x)
-        # self.log_position('lower', x, y, i, j)
         return self.status_grid[i][j]
 
     def lower_left(self, x, y):
         """Get the value of the cell to the lower left."""
         j, i = self.check_down_y(y), self.check_left_x(x)
-        # self.log_position('lower left', x, y, i, j)
         return self.status_grid[i][j]
 
     def left(self, x, y):
         """Get the value of the cell to the left."""
         j, i = self.scale(y), self.check_left_x(x)
-        # self.log_position('left', x, y, i, j)
         return self.status_grid[i][j]
 
     def count_neighbors(self, x, y):
@@ -231,6 +206,26 @@ class GameOfLife:
                 else:
                     self.clear_cell(low_point, high_point)
 
+    def next_generation(self):
+        for y in range(0, self.max_y, self.step):
+            for x in range(0, self.max_x, self.step):
+                x_scale = self.scale(x)
+                y_scale = self.scale(y)
+                #  live = self.status_grid[self.scale(x_scale)][self.scale(y_scale)]
+                live = self.status_grid[x_scale][y_scale]
+                count = self.count_neighbors(x, y)
+                if live == 1 and count < 2:
+                    self.next_grid[x_scale][y_scale] = 0
+                elif live == 1 and count > 3:
+                    self.next_grid[x_scale][y_scale] = 0
+                elif live == 1 and count in [2, 3]:
+                    self.next_grid[x_scale][y_scale] = self.status_grid[x_scale][y_scale]
+                elif live == 0 and count == 3:
+                    self.next_grid[x_scale][y_scale] = 1
+                #else:
+                #    self.next_grid[x_scale][y_scale] = self.status_grid[x_scale][y_scale]
+        return
+
     def update_grid(self, setup_grid):
         while True:
             point = self.win.getMouse()
@@ -248,25 +243,9 @@ class GameOfLife:
             else:
                 self.clear_cell(low_point, high_point)
                 self.status_grid[matrix_x][matrix_y] = 0
+
             if matrix_x == 0 and matrix_y == 0 and setup_grid == 1:
-                for y in range(0, self.max_y, self.step):
-                    for x in range(0, self.max_x, self.step):
-                        x_scale = self.scale(x)
-                        y_scale = self.scale(y)
-                        self.logger.debug('-------------------- check neighbor loop ---------')
-                        self.logger.debug('if matrix loop x = ' + str(x_scale) + ' y = ' + str(y_scale))
-                        live = self.status_grid[self.scale(x_scale)][self.scale(y_scale)]
-                        count = self.count_neighbors(x, y)
-                        # tkMessageBox.showinfo(title="Debug", message="(x,y) = (" + str(x) +
-                        #                                             ',' + str(y) + ') count = ' + str(count))
-                        if count < 2:
-                            self.next_grid[x_scale][y_scale] = 0
-                        elif count in [2, 3]:
-                            self.next_grid[x_scale][y_scale] = 1
-                        elif count > 3:
-                            self.next_grid[x_scale][y_scale] = 0
-                        else:
-                            self.next_grid[x_scale][y_scale] = self.status_grid[x_scale][y_scale]
+                self.next_generation()
                 return
 
     def mouse_test(self):
@@ -277,9 +256,9 @@ class GameOfLife:
         setup_grid = 0
 
         while 1 == 1:
-            self.refresh_grid()
-            self.update_grid(setup_grid)
             self.logger.info('Generation: ' + str(self.generation))
+            self.next_generation()
+            self.refresh_grid()
             self.generation += 1
 
     def show_grids(self):
