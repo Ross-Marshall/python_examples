@@ -34,6 +34,7 @@ class GameOfLife:
     win = None
     status_grid = None
     next_grid = None
+    changed_items = []
     i = 0
     j = 0
     generation = 0
@@ -195,16 +196,29 @@ class GameOfLife:
     def refresh_grid(self):
         """Update the grid array that keeps track of the state."""
         self.status_grid = self.next_grid
+        # for y in range(0, self.max_y - self.step, self.step):
+        #     for x in range(0, self.max_x - self.step, self.step):
+        for point in self.changed_items:
+            x = point[0]
+            y = point[1]
+            low_point = Point(x, y)
+            high_point = Point(x + self.step, y + self.step)
+            if self.status_grid[self.scale(x)][self.scale(y)] == 1:
+                self.cell(low_point, high_point)
+            else:
+                self.clear_cell(low_point, high_point)
+
+        """def refresh_grid(self):"""
+        """Update the grid array that keeps track of the state."""
+        """self.status_grid = self.next_grid
         for y in range(0, self.max_y - self.step, self.step):
             for x in range(0, self.max_x - self.step, self.step):
-                self.logger.debug('------------------------------------')
-                self.logger.debug('refresh_grid ===> x = ' + str(x) + ' y = ' + str(y))
                 low_point = Point(x, y)
                 high_point = Point(x + self.step, y + self.step)
                 if self.status_grid[self.scale(x)][self.scale(y)] == 1:
                     self.cell(low_point, high_point)
                 else:
-                    self.clear_cell(low_point, high_point)
+                    self.clear_cell(low_point, high_point)"""
 
     def next_generation(self):
         for y in range(0, self.max_y, self.step):
@@ -224,6 +238,9 @@ class GameOfLife:
                     self.next_grid[x_scale][y_scale] = 1
                 #else:
                 #    self.next_grid[x_scale][y_scale] = self.status_grid[x_scale][y_scale]
+
+                if live != self.next_grid[x_scale][y_scale]:
+                    self.changed_items.append([x, y])
         return
 
     def update_grid(self, setup_grid):
