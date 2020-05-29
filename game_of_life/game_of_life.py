@@ -22,8 +22,8 @@ import logging
 
 class GameOfLife:
 
-    max_matrix_x = 120
-    max_matrix_y = 70
+    max_matrix_x = 12  # 120
+    max_matrix_y = 7  # 70
 
     step = 10
     max_x = max_matrix_x * step
@@ -221,6 +221,7 @@ class GameOfLife:
                     self.clear_cell(low_point, high_point)"""
 
     def next_generation(self):
+        self.next_grid = self.initialze_status_grid()
         for y in range(0, self.max_y, self.step):
             for x in range(0, self.max_x, self.step):
                 x_scale = self.scale(x)
@@ -236,8 +237,8 @@ class GameOfLife:
                     self.next_grid[x_scale][y_scale] = self.status_grid[x_scale][y_scale]
                 elif live == 0 and count == 3:
                     self.next_grid[x_scale][y_scale] = 1
-                #else:
-                #    self.next_grid[x_scale][y_scale] = self.status_grid[x_scale][y_scale]
+                else:
+                    self.next_grid[x_scale][y_scale] = self.status_grid[x_scale][y_scale]
 
                 if live != self.next_grid[x_scale][y_scale]:
                     self.changed_items.append([x, y])
