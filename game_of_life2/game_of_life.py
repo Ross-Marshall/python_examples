@@ -18,7 +18,7 @@ from pygame.locals import*
 import time
 import math
 import logging
-
+from Point import Point
 
 class GameOfLife:
 
@@ -82,8 +82,8 @@ class GameOfLife:
     def draw_horizontal_lines(self):
         """Draw the horizontal lines in the window."""
         for y in range(self.start, self.max_y, self.step):
-            """px = Point(0, y)
-            py = Point(self.max_x, y)
+            """px = point(0, y)
+            py = point(self.max_x, y)
             line1 = Line(px, py)
             line1.setWidth(self.line_width)
             line1.draw(self.win)"""
@@ -94,8 +94,8 @@ class GameOfLife:
     def draw_vertical_lines(self):
         """Draw the vertical lines in the window."""
         for x in range(self.start, self.max_x, self.step):
-            """px = Point(x, 0)
-            py = Point(x, self.max_y)
+            """px = point(x, 0)
+            py = point(x, self.max_y)
             line1 = Line(px, py)
             line1.setWidth(self.line_width)
             line1.draw(self.win)"""
@@ -104,14 +104,14 @@ class GameOfLife:
 
     #"""def draw_boxes(self):"""
     #    """Proof of concept.  Draw cells on the grid"""
-    #    """self.cell(Point(10, 10), Point(20, 20))
-    #    self.cell(Point(100, 100), Point(110, 110))
-    #    self.cell(Point(240, 240), Point(250, 250))
-    #    self.cell(Point(500, 40), Point(510, 50))
-    #    self.cell(Point(340, 200), Point(350, 210))
-    #    self.cell(Point(700, 600), Point(710, 610))
-    #    self.cell(Point(900, 480), Point(910, 490))
-    #    self.cell(Point(1000, 600), Point(1010, 610))"""
+    #    """self.cell(point(10, 10), point(20, 20))
+    #    self.cell(point(100, 100), point(110, 110))
+    #    self.cell(point(240, 240), point(250, 250))
+    #    self.cell(point(500, 40), point(510, 50))
+    #    self.cell(point(340, 200), point(350, 210))
+    #    self.cell(point(700, 600), point(710, 610))
+    #    self.cell(point(900, 480), point(910, 490))
+    #    self.cell(point(1000, 600), point(1010, 610))"""
 
     @staticmethod
     def message_box():
@@ -122,9 +122,9 @@ class GameOfLife:
         #window.geometry("1x1+200+200")  # remember its .geometry("WidthxHeight(+or-)X(+or-)Y")
         #tkMessageBox.showerror(title="info", message="Click to Exit", parent=window)
 
-    @staticmethod
-    def Point(x, y):
-        return [x, y]
+    #@staticmethod
+    #def point(x, y):
+    #    return x, y
 
     def check_up_y(self, j):
         """Check y cell above the current cell."""
@@ -218,8 +218,8 @@ class GameOfLife:
         for point in self.changed_items:
             x = point[0]
             y = point[1]
-            low_point = Point(x, y)
-            high_point = Point(x + self.step, y + self.step)
+            low_point = self.point(x, y)
+            high_point = self.point(x + self.step, y + self.step)
             if self.status_grid[self.scale(x)][self.scale(y)] == 1:
                 self.cell(low_point, high_point)
             else:
@@ -230,8 +230,8 @@ class GameOfLife:
         """self.status_grid = self.next_grid
         for y in range(0, self.max_y - self.step, self.step):
             for x in range(0, self.max_x - self.step, self.step):
-                low_point = Point(x, y)
-                high_point = Point(x + self.step, y + self.step)
+                low_point = point(x, y)
+                high_point = point(x + self.step, y + self.step)
                 if self.status_grid[self.scale(x)][self.scale(y)] == 1:
                     self.cell(low_point, high_point)
                 else:
@@ -264,8 +264,8 @@ class GameOfLife:
     def update_grid(self, setup_grid):
         while True:
             point = pygame.mouse.get_pos()
-            low_point = Point(self.round_down(point.x), self.round_down(point.y))
-            high_point = Point(self.round_up(point.x), self.round_up(point.y))
+            low_point = Point(self.round_down(point[0]), self.round_down(point[1]))
+            high_point = Point(self.round_up(point[0]), self.round_up(point[0]))
             self.logger.debug('low_point = ' + str(low_point) + ' high_point = ' + str(high_point))
             matrix_x = self.scale(low_point.x)
             matrix_y = self.scale(low_point.y)
