@@ -22,8 +22,8 @@ from Point import Point
 
 class GameOfLife:
 
-    max_matrix_x = 120
-    max_matrix_y =  70
+    max_matrix_x = 30 # 120
+    max_matrix_y = 20 # 70
 
     step = 10
 
@@ -218,8 +218,8 @@ class GameOfLife:
         for point in self.changed_items:
             x = point[0]
             y = point[1]
-            low_point = self.point(x, y)
-            high_point = self.point(x + self.step, y + self.step)
+            low_point = Point(x, y)
+            high_point = Point(x + self.step, y + self.step)
             if self.status_grid[self.scale(x)][self.scale(y)] == 1:
                 self.cell(low_point, high_point)
             else:
@@ -263,25 +263,37 @@ class GameOfLife:
 
     def update_grid(self, setup_grid):
         while True:
-            point = pygame.mouse.get_pos()
-            low_point = Point(self.round_down(point[0]), self.round_down(point[1]))
-            high_point = Point(self.round_up(point[0]), self.round_up(point[0]))
-            self.logger.debug('low_point = ' + str(low_point) + ' high_point = ' + str(high_point))
-            matrix_x = self.scale(low_point.x)
-            matrix_y = self.scale(low_point.y)
-            self.logger.debug('matrix_x = ' + str(matrix_x) + ' matrix_y= ' + str(matrix_y))
-            self.show_grids()
+            ev = pygame.event.get()
 
-            if self.status_grid[matrix_x][matrix_y] == 0:
-                self.cell(low_point, high_point)
-                self.status_grid[matrix_x][matrix_y] = 1
-            else:
-                self.clear_cell(low_point, high_point)
-                self.status_grid[matrix_x][matrix_y] = 0
+            # proceed events
+            for event in ev:
 
-            if matrix_x == 0 and matrix_y == 0 and setup_grid == 1:
-                self.next_generation()
-                return
+                # handle MOUSEBUTTONUP
+                if event.type == pygame.MOUSEBUTTONUP:
+                    # pos = pygame.mouse.get_pos()
+
+                    # get a list of all sprites that are under the mouse cursor
+                    #clicked_sprites = [s for s in sprites if s.rect.collidepoint(pos)]
+                    # do something with the clicked sprites...
+                    point = pygame.mouse.get_pos()
+                    low_point = Point(self.round_down(point[0]), self.round_down(point[1]))
+                    high_point = Point(self.round_up(point[0]), self.round_up(point[0]))
+                    matrix_x = self.scale(low_point.x)
+                    matrix_y = self.scale(low_point.y)
+                    self.show_grids()
+            """ 
+            if setup_grid == 0:
+                if self.status_grid[matrix_x][matrix_y] == 0:
+                    self.cell(low_point, high_point)
+                    self.status_grid[matrix_x][matrix_y] = 1
+                else:
+                    self.clear_cell(low_point, high_point)
+                    self.status_grid[matrix_x][matrix_y] = 0
+
+            #if matrix_x == 0 and matrix_y == 0 and setup_grid == 1:
+            #    self.next_generation()
+            #    return
+        """
 
     def mouse_test(self):
         setup_grid = 1
@@ -290,7 +302,7 @@ class GameOfLife:
         self.refresh_grid()
         setup_grid = 0
 
-        while 1 == 1:
+        while True:
             self.logger.info('Generation: ' + str(self.generation))
             self.next_generation()
             self.refresh_grid()
