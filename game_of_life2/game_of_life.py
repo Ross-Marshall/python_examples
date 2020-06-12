@@ -71,6 +71,7 @@ class GameOfLife:
         box.setFill('black')
         box.draw(self.win)"""
         pygame.draw.rect(self.screen, self.Color_line, (p1.x, p1.y, p2.x, p2.y), self.line_width)
+        pygame.display.flip()
 
     def clear_cell(self, p1, p2):
         """Clear the box."""
@@ -78,6 +79,7 @@ class GameOfLife:
         box.setFill('gainsboro')
         box.draw(self.win)"""
         pygame.draw.rect(self.screen, self.Color_screen, (p1.x, p1.y, p2.x, p2.y), self.line_width)
+        pygame.display.flip()
 
     def draw_horizontal_lines(self):
         """Draw the horizontal lines in the window."""
@@ -281,19 +283,19 @@ class GameOfLife:
                     matrix_x = self.scale(low_point.x)
                     matrix_y = self.scale(low_point.y)
                     self.show_grids()
-            """ 
-            if setup_grid == 0:
-                if self.status_grid[matrix_x][matrix_y] == 0:
-                    self.cell(low_point, high_point)
-                    self.status_grid[matrix_x][matrix_y] = 1
-                else:
-                    self.clear_cell(low_point, high_point)
-                    self.status_grid[matrix_x][matrix_y] = 0
+
+                    #if setup_grid == 0:
+                    if self.status_grid[matrix_x][matrix_y] == 0:
+                        self.cell(low_point, high_point)
+                        self.status_grid[matrix_x][matrix_y] = 1
+                    else:
+                        self.clear_cell(low_point, high_point)
+                        self.status_grid[matrix_x][matrix_y] = 0
 
             #if matrix_x == 0 and matrix_y == 0 and setup_grid == 1:
             #    self.next_generation()
             #    return
-        """
+
 
     def mouse_test(self):
         setup_grid = 1
