@@ -22,8 +22,8 @@ from Point import Point
 
 class GameOfLife:
 
-    max_matrix_x = 30 # 120
-    max_matrix_y = 20 # 70
+    max_matrix_x = 50  # 120
+    max_matrix_y = 30  # 70
 
     step = 10
 
@@ -70,7 +70,8 @@ class GameOfLife:
         """box = Rectangle(p1, p2)  # set endpoints
         box.setFill('black')
         box.draw(self.win)"""
-        pygame.draw.rect(self.screen, self.Color_line, (p1.x, p1.y, p2.x, p2.y), self.line_width)
+        rect = Rect(p1.x, p2.y, self.step, self.step)
+        pygame.draw.rect(self.screen, self.Color_line, rect, 0)
         pygame.display.flip()
 
     def clear_cell(self, p1, p2):
@@ -78,7 +79,8 @@ class GameOfLife:
         """box = Rectangle(p1, p2)  # set endpoints
         box.setFill('gainsboro')
         box.draw(self.win)"""
-        pygame.draw.rect(self.screen, self.Color_screen, (p1.x, p1.y, p2.x, p2.y), self.line_width)
+        rect = Rect(p1.x, p2.y, self.step, self.step)
+        pygame.draw.rect(self.screen, self.Color_screen, rect, 0)
         pygame.display.flip()
 
     def draw_horizontal_lines(self):
@@ -270,6 +272,9 @@ class GameOfLife:
             # proceed events
             for event in ev:
 
+                matrix_x = 0
+                matrix_y = 0
+
                 # handle MOUSEBUTTONUP
                 if event.type == pygame.MOUSEBUTTONUP:
                     # pos = pygame.mouse.get_pos()
@@ -279,7 +284,7 @@ class GameOfLife:
                     # do something with the clicked sprites...
                     point = pygame.mouse.get_pos()
                     low_point = Point(self.round_down(point[0]), self.round_down(point[1]))
-                    high_point = Point(self.round_up(point[0]), self.round_up(point[0]))
+                    high_point = Point(self.round_up(point[0]), self.round_up(point[1]))
                     matrix_x = self.scale(low_point.x)
                     matrix_y = self.scale(low_point.y)
                     self.show_grids()
@@ -292,9 +297,9 @@ class GameOfLife:
                         self.clear_cell(low_point, high_point)
                         self.status_grid[matrix_x][matrix_y] = 0
 
-            #if matrix_x == 0 and matrix_y == 0 and setup_grid == 1:
-            #    self.next_generation()
-            #    return
+                    if matrix_x == 0 and matrix_y == 0 and setup_grid == 1:
+                        self.next_generation()
+                        return
 
 
     def mouse_test(self):
@@ -323,9 +328,9 @@ class GameOfLife:
         self.screen = pygame.display.set_mode((self.max_x, self.max_y))
         self.screen.fill(self.Color_screen)
 
-        self.draw_horizontal_lines()
-        self.draw_vertical_lines()
-        pygame.display.flip()
+        #self.draw_horizontal_lines()
+        #self.draw_vertical_lines()
+        #pygame.display.flip()
 
 
         """while True:
